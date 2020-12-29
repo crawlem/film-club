@@ -1,18 +1,26 @@
 <template>
-  <div class="container">
-    <h2>Backlog</h2>
-    <div class="films-list">
-      <Film v-for="film in backlog" :key="film.ID" :film="film" />
+  <div>
+    <div class="jumbotron container-fluid">
+      <h2 class="display-4">
+        Backlog
+      </h2>
+      <p class="lead">
+        These films are on our backlog to watch at some point in future.
+      </p>
     </div>
+
+    <section title="Upcoming films" class="container-fluid">
+      <FilmList :list="backlog" />
+    </section>
   </div>
 </template>
 
 <script>
-import Film from '~/components/film.vue'
+import FilmList from '~/components/FilmList.vue'
 export default {
   name: 'Backlog',
   components: {
-    Film
+    FilmList
   },
   async asyncData ({ $axios }) {
     const { data } = await $axios.get('/Films?view=Backlog')

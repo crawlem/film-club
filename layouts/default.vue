@@ -1,19 +1,19 @@
 <template>
   <div>
-    <Navigation />
-    <Nuxt />
+    <header>
+      <SiteNav />
+    </header>
+    <div class="content">
+      <Nuxt />
+    </div>
   </div>
 </template>
 
 <script>
-import Navigation from '~/components/navigation.vue'
+import SiteNav from '~/components/SiteNav.vue'
 export default {
   components: {
-    Navigation
+    SiteNav
   }
 }
 </script>
-
-<style>
-
-</style>
