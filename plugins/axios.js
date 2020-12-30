@@ -1,5 +1,5 @@
-export default ({ $axios, env }) => {
+export default ({ $axios, $config: { apiKey } }) => {
   $axios.onRequest((config) => {
-    config.headers.common.Authorization = `Bearer ${env.API_KEY}`
+    config.headers.common.Authorization = `Bearer ${apiKey}`
   })
 }

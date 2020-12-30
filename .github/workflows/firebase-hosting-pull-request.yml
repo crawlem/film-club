@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci && npm run build
+      - run: npm ci && npm run generate
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -16,3 +16,5 @@ jobs:
           projectId: film-club-a2a16
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
+          API_URL: '${{ secrets.API_URL }}'
+          API_KEY: '${{ secrets.API_KEY }}'
