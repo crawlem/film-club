@@ -19,7 +19,8 @@ export default {
         'badge-info': this.tag === 'Comedy',
         'badge-dark': this.tag === 'Drama',
         'badge-danger': this.tag === 'Horror',
-        'badge-secondary': this.tag === 'Documentary'
+        'badge-secondary': this.tag === 'Documentary',
+        'badge-light': this.tag === 'Action'
       }
     }
   }
