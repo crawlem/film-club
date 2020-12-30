@@ -1,6 +1,8 @@
 # film-club
 
-## Build Setup
+A Vue.js / Nuxt website for my monthly film club.
+
+## Build & Deployment
 
 ```bash
 # install dependencies
@@ -15,6 +17,9 @@ $ npm run start
 
 # generate static project
 $ npm run generate
+
+# deploy to firebase
+$ firebase deploy
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
