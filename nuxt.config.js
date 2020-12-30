@@ -32,8 +32,7 @@ export default {
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/eslint-module'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -42,8 +41,12 @@ export default {
     'bootstrap-vue/nuxt'
   ],
 
+  privateRuntimeConfig: {
+    apiKey: process.env.API_KEY
+  },
+
   axios: {
-    baseURL: process.env.API_URL
+    baseURL: process.env.API_URL || 'https://api.airtable.com/v0/app1BIEMh8jgZlYdN'
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
