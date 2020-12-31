@@ -73,7 +73,7 @@ export default {
   },
   computed: {
     meetingDate () {
-      return (moment(this.nextMeeting.date).isValid()) ? moment(this.nextMeeting.date).format('dddd Do MMMM gggg') : this.nextMeeting.date
+      return (moment(new Date(this.nextMeeting.date)).isValid()) ? moment(new Date(this.nextMeeting.date)).format('dddd Do MMMM gggg') : this.nextMeeting.date
     }
   }
 }
