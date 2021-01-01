@@ -20,7 +20,8 @@ export default {
         'badge-dark': this.tag === 'Drama',
         'badge-danger': this.tag === 'Horror',
         'badge-secondary': this.tag === 'Documentary',
-        'badge-light': this.tag === 'Action'
+        'badge-light': this.tag === 'Action',
+        'badge-primary': this.tag === 'Sci-fi'
       }
     }
   }
