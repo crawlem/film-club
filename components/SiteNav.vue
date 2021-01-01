@@ -40,10 +40,10 @@
         <b-nav-item to="/" active-class="active" exact>
           Next meeting
         </b-nav-item>
-        <b-nav-item to="backlog" active-class="active">
+        <b-nav-item to="/backlog" active-class="active">
           Backlog
         </b-nav-item>
-        <b-nav-item to="suggest" active-class="active">
+        <b-nav-item to="/suggest" active-class="active">
           Suggest a film
         </b-nav-item>
       </ul>
