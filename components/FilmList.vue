@@ -29,6 +29,6 @@ export default {
 }
 
 .films-list .film {
-    margin: 1vw;
+    margin: 0 5px 5px 0;
 }
 </style>
