@@ -1,6 +1,12 @@
 <template>
-  <div class="film card" style="width: 178px">
-    <img :src="imgSrc" width="178" height="264" alt="" class="card-img-top">
+  <div class="film card">
+    <img
+      :src="imgSrc"
+      width="178"
+      height="264"
+      alt=""
+      class="card-img-top"
+    >
     <div class="card-body d-flex flex-column">
       <h5 class="card-title">
         {{ film.fields.Name }}
@@ -64,6 +70,16 @@ export default {
 </script>
 
 <style>
+.film.card, .card-img-top {
+  max-width: 178px;
+}
+
+@media only screen and (max-width: 600px) {
+  .film.card, .card-img-top {
+    max-width: 155px;
+  }
+}
+
 .imdb, .justWatch, .reelGood {
   display: none;
 }
