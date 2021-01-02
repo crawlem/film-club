@@ -22,7 +22,7 @@
             </h5>
             <p class="card-text">
               The film we will review next time is
-              <a v-if="nextMeeting.url" :href="nextMeeting.url">{{ nextMeeting.filmTitle }}</a>
+              <a v-if="nextMeeting.url" :href="nextMeeting.url" target="_blank">{{ nextMeeting.filmTitle }}</a>
               <span v-else>{{ nextMeeting.filmTitle }}</span>
             </p>
           </div>
