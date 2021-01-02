@@ -58,7 +58,9 @@ export default {
       if ('Film' in nextMeeting.data.records[0].fields) {
         const nextFilm = await $axios.get('/Films/' + nextMeeting.data.records[0].fields.Film)
         nextFilmTitle = nextFilm.data.fields.Name
-        nextFilmUrl = nextFilm.data.fields['JustWatch link']
+        if ('ReelGood link' in nextFilm.data.fields) {
+          nextFilmUrl = nextFilm.data.fields['ReelGood link']
+        }
       }
     }
 
