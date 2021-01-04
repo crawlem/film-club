@@ -22,12 +22,13 @@ export default {
   components: {
     FilmList
   },
-  async asyncData ({ $axios }) {
-    const { data } = await $axios.get('/Films?view=Backlog')
-    return { backlog: data.records }
+  async asyncData ({ $config, $airtable }) {
+    const backlogResponse = await $airtable.get('/Films?view=Backlog')
+    const backlog = await backlogResponse.json()
+
+    return {
+      backlog: backlog.records
+    }
   }
 }
 </script>
-
-<style scoped>
-</style>

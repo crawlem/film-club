@@ -11,7 +11,9 @@
     "lint": "npm run lint:js"
   },
   "dependencies": {
+    "@nuxt/http": "^0.6.2",
     "@nuxtjs/axios": "^5.12.4",
+    "airtable": "^0.10.1",
     "bootstrap-vue": "^2.21.1",
     "core-js": "^3.6.5",
     "moment": "^2.29.1",
