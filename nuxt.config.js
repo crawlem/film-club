@@ -23,7 +23,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '~/plugins/axios'
+    '~/plugins/airtable'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -37,16 +37,14 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    '@nuxtjs/axios',
-    'bootstrap-vue/nuxt'
+    'bootstrap-vue/nuxt',
+    '@nuxt/http'
   ],
 
-  privateRuntimeConfig: {
-    apiKey: process.env.API_KEY
-  },
-
-  axios: {
-    baseURL: process.env.API_URL || 'https://api.airtable.com/v0/app1BIEMh8jgZlYdN'
+  publicRuntimeConfig: {
+    baseUrl: 'https://api.airtable.com/v0/',
+    apiKey: process.env.API_KEY,
+    baseId: process.env.API_BASE_ID
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

@@ -38,34 +38,42 @@
 </template>
 
 <script>
-import moment from 'moment'
+import Moment from 'moment'
 import FilmList from '~/components/FilmList.vue'
+
 export default {
   components: {
     FilmList
   },
-  async asyncData ({ $axios }) {
-    const { data } = await $axios.get('/Films?view=History&maxRecords=3')
+  async asyncData ({ $config, $airtable }) {
+    // Retrieve most recently watched films
+    const historyResponse = await $airtable.get('/Films?view=History&maxRecords=3')
+    const history = await historyResponse.json()
 
-    const nextMeeting = await $axios.get('/Meetings?maxRecords=1&sort[0][field]=Date&sort[0][direction]=desc&filterByFormula={Date} >= TODAY()')
+    // Retrieve next meeting date/film
+    const nextMeetingResponse = await $airtable.get('/Meetings?maxRecords=1&sort[0][field]=Date&sort[0][direction]=desc&filterByFormula={Date} >= TODAY()')
+    const nextMeeting = await nextMeetingResponse.json()
 
     let nextMeetingDate = 'Not booked'
     let nextFilmTitle = 'TBC'
     let nextFilmUrl = null
 
-    if (Array.isArray(nextMeeting.data.records) && nextMeeting.data.records.length > 0) {
-      nextMeetingDate = nextMeeting.data.records[0].fields.Date
-      if ('Film' in nextMeeting.data.records[0].fields) {
-        const nextFilm = await $axios.get('/Films/' + nextMeeting.data.records[0].fields.Film)
-        nextFilmTitle = nextFilm.data.fields.Name
-        if ('ReelGood link' in nextFilm.data.fields) {
-          nextFilmUrl = nextFilm.data.fields['ReelGood link']
+    if (Array.isArray(nextMeeting.records) && nextMeeting.records.length > 0) {
+      nextMeetingDate = nextMeeting.records[0].fields.Date
+      if ('Film' in nextMeeting.records[0].fields) {
+        // Get details of the upcoming film
+        const nextFilmResponse = await $airtable.get('/Films/' + nextMeeting.records[0].fields.Film)
+        const nextFilm = await nextFilmResponse.json()
+
+        nextFilmTitle = nextFilm.fields.Name
+        if ('ReelGood link' in nextFilm.fields) {
+          nextFilmUrl = nextFilm.fields['ReelGood link']
         }
       }
     }
 
     return {
-      history: data.records,
+      history: history.records,
       nextMeeting: {
         date: nextMeetingDate,
         filmTitle: nextFilmTitle,
@@ -75,7 +83,7 @@ export default {
   },
   computed: {
     meetingDate () {
-      return (moment(new Date(this.nextMeeting.date)).isValid()) ? moment(new Date(this.nextMeeting.date)).format('dddd Do MMMM gggg') : this.nextMeeting.date
+      return (Moment(new Date(this.nextMeeting.date)).isValid()) ? Moment(new Date(this.nextMeeting.date)).format('dddd Do MMMM gggg') : this.nextMeeting.date
     }
   }
 }
