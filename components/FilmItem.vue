@@ -78,6 +78,10 @@ export default {
   .film.card, .card-img-top {
     max-width: 155px;
   }
+
+  .film.card .card-link {
+    margin-left: 5px;
+  }
 }
 
 .imdb, .justWatch, .reelGood {
