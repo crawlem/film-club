@@ -91,3 +91,6 @@ sw.*
 
 # Firebase
 .firebase
+
+# Vetur
+.vetur.config.js
