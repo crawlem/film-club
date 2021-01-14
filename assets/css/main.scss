@@ -1,0 +1,67 @@
+// VARIABLES
+// =================================================
+// ----Colours---------
+$color-text: #DBF9F0;
+$color-text-light: #E8F1F2;
+$color-bg: #232E30;
+$color-bg-dark: #12130F;
+$color-fade: #727072;
+$color-primary: #FFBC42;
+$color-secondary: #17BEBB;
+$color-tertiary: #8ED081;
+// ----Gutters---------
+$padding-sm: .4em;
+
+// Basic reset
+html, body, div, span, a, h1, h2, h3, h4, h5, h6, p, blockquote, img, 
+ol, ul, li, input, label, select, table, tbody, tfoot, thead, tr, th, 
+td, footer, header, menu, nav, section, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  list-style: none;
+}
+
+body {
+  background-color: $color-bg;
+  color: $color-text;
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 200;
+}
+
+a {
+  color: $color-primary;
+}
+
+h1, h2, h3 {
+  font-weight: 400;
+}
+
+header.site-header {
+  padding: 1em;
+  background-color: $color-bg-dark;
+  color: $color-text-light;
+  display: flex;
+
+  a.site-logo-link {
+    color: $color-text-light;
+    text-decoration: none;
+  }
+
+  .site-logo {
+    display: flex;
+    margin-right: $padding-sm;
+    text-transform: uppercase;
+    font-size: 1.3em;
+    letter-spacing: .1em;
+
+    img {
+      margin-right: $padding-sm;
+    }
+  }
+}
+
+// nav.main-nav {
+
+// }
