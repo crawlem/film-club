@@ -1,8 +1,8 @@
 export default function ({ $http, $config }, inject) {
   // Setup the HTTP object
   const $airtable = $http.create({})
-  $airtable.setBaseURL($config.baseUrl + $config.baseId)
-  $airtable.setToken($config.apiKey, 'Bearer')
+  $airtable.setBaseURL($config.AIRT_BASE_URL + $config.AIRT_API_BASE_ID)
+  $airtable.setToken($config.AIRT_API_KEY, 'Bearer')
 
   // Inject to the context as $airtable
   inject('airtable', $airtable)

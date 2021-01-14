@@ -42,9 +42,11 @@ export default {
   ],
 
   publicRuntimeConfig: {
-    baseUrl: 'https://api.airtable.com/v0/',
-    apiKey: process.env.API_KEY,
-    baseId: process.env.API_BASE_ID
+    AIRT_BASE_URL: process.env.AIRT_BASE_URL || 'https://api.airtable.com/v0/',
+    AIRT_API_KEY: process.env.AIRT_API_KEY,
+    AIRT_API_BASE_ID: process.env.AIRT_API_BASE_ID,
+    TMDB_BASE_URL: process.env.TMDB_BASE_URL || 'https://api.themoviedb.org/3/',
+    TMDB_API_KEY: process.env.TMDB_API_KEY
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
