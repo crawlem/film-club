@@ -4,9 +4,9 @@
       <h2 class="display-4">
         Backlog
       </h2>
-      <p class="lead">
+      <!-- <p class="lead">
         These films are on our backlog to watch at some point in future.
-      </p>
+      </p> -->
     </div>
 
     <section title="Upcoming films" class="container-fluid">
@@ -22,12 +22,13 @@ export default {
   components: {
     FilmList
   },
-  async asyncData ({ $config, $airtable }) {
-    const backlogResponse = await $airtable.get('/Films?view=Backlog')
-    const backlog = await backlogResponse.json()
-
-    return {
-      backlog: backlog.records
+  async asyncData ({ $config, store }) {
+    // Retrieve most recently watched films
+    await store.dispatch('films/loadBacklog')
+  },
+  computed: {
+    backlog () {
+      return this.$store.state.films.backlog
     }
   }
 }

@@ -1,7 +1,9 @@
 <template>
-  <div class="films-list">
-    <FilmItem v-for="film in list" :key="film.id" :film="film" />
-  </div>
+  <ul class="film-list">
+    <li v-for="film in list" :key="film.id" class="film-item">
+      <FilmItem :film="film" :show-rating="showRatings" />
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -17,6 +19,14 @@ export default {
       default () {
         return []
       }
+    },
+    showReviews: {
+      type: Boolean,
+      default: false
+    },
+    showRatings: {
+      type: Boolean,
+      default: false
     }
   }
 }

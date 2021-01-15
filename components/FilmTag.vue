@@ -1,5 +1,5 @@
 <template>
-  <span class="tag badge" :class="classObject">{{ tag }}</span>
+  <span class="film-tag" :class="classObject">{{ tag }}</span>
 </template>
 
 <script>
@@ -14,22 +14,16 @@ export default {
   computed: {
     classObject () {
       return {
-        'badge-warning': this.tag === 'Thriller',
-        'badge-success': this.tag === 'Animation',
-        'badge-info': this.tag === 'Comedy',
-        'badge-dark': this.tag === 'Drama',
-        'badge-danger': this.tag === 'Horror',
-        'badge-secondary': this.tag === 'Documentary',
-        'badge-light': this.tag === 'Action',
-        'badge-primary': this.tag === 'Sci-fi'
+        'tag-thriller': this.tag === 'Thriller',
+        'tag-animation': this.tag === 'Animation',
+        'tag-comedy': this.tag === 'Comedy',
+        'tag-drama': this.tag === 'Drama',
+        'tag-horror': this.tag === 'Horror',
+        'tag-documentary': this.tag === 'Documentary',
+        'tag-action': this.tag === 'Action',
+        'tag-scifi': this.tag === 'Sci-fi'
       }
     }
   }
 }
 </script>
-
-<style>
-.tag {
-  margin-right: .5em;
-}
-</style>

@@ -1,12 +1,22 @@
 <template>
-  <div :class="review.fields.Review ? 'review' : 'film'">
-    <img
-      :src="imgSrc"
-      width="178"
-      height="264"
-      alt=""
-    >
-    <div class="card-body">
+  <div class="film">
+    <div class="film-poster">
+      <img
+        :src="imgSrc"
+        width="150"
+        height="225"
+        :alt="film.fields.Name"
+      >
+      <ul class="film-tag-list">
+        <li v-for="tag in film.fields.Genre" :key="tag" class="film-tag-item">
+          <FilmTag :tag="tag" />
+        </li>
+      </ul>
+    </div>
+    <div v-if="showRating" class="film-icons">
+      <FilmRating :stars="review.fields.Rating" /> <span class="rating-date">Jan 21</span>
+    </div>
+    <!-- <div class="card-body">
       <h5 class="card-title">
         {{ film.fields.Name }}
       </h5>
@@ -34,22 +44,21 @@
           <span class="reel-good">ReelGood</span>
         </a>
       </p>
-      <p v-if="review.fields.Review" class="card-text review-text">
+      <p v-if="review.fields.Review && showReview" class="card-text review-text">
         {{ review.fields.Review }}
       </p>
-      <p class="tags mt-auto mb-0">
-        <FilmTag v-for="tag in film.fields.Genre" :key="tag" :tag="tag" />
-      </p>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import FilmTag from '~/components/FilmTag.vue'
+import FilmRating from '~/components/FilmRating.vue'
 export default {
   name: 'FilmItem',
   components: {
-    FilmTag
+    FilmTag,
+    FilmRating
   },
   props: {
     film: {
@@ -72,6 +81,16 @@ export default {
           }
         }
       }
+    },
+    showReview: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    },
+    showRating: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -81,34 +100,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.film, .review {
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 4px;
-  overflow-wrap: break-word;
-}
-
-.film {
-  max-width: 178px;
-}
-
-.review {
-  display: flex;
-  width: 100%;
-}
-
-@media only screen and (max-width: 600px) {
-  .film.card, .card-img-top {
-    max-width: 155px;
-  }
-
-  .film.card .card-link {
-    margin-left: 5px;
-  }
-}
-
-.imdb, .just-watch, .reel-good {
-  display: none;
-}
-</style>

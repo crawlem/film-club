@@ -1,16 +1,26 @@
-// VARIABLES
-// =================================================
-// ----Colours---------
-$color-text: #DBF9F0;
+// Variables
+// ================================================
+
+// ----Colours--------
+$color-text: #86BBBD;
 $color-text-light: #E8F1F2;
-$color-bg: #232E30;
+$color-bg: #1A2223;
 $color-bg-dark: #12130F;
 $color-fade: #727072;
-$color-primary: #FFBC42;
-$color-secondary: #17BEBB;
-$color-tertiary: #8ED081;
-// ----Gutters---------
-$padding-sm: .4em;
+$color-primary: #F26430;
+$color-secondary: #76949F;
+$color-tertiary: #BBBE64;
+
+// ----Gutters--------
+$spacing-sm: 6px;
+$spacing-md: .8em;
+$spacing-lg: 1.4em;
+
+// ----Misc--------
+$border-radius: 5px;
+
+// Mobile-first styles
+// ================================================
 
 // Basic reset
 html, body, div, span, a, h1, h2, h3, h4, h5, h6, p, blockquote, img, 
@@ -28,40 +38,160 @@ body {
   color: $color-text;
   font-family: 'Fira Sans', sans-serif;
   font-weight: 200;
+  // Push content below fixed header
+  padding-top: 5rem;
 }
 
-a {
-  color: $color-primary;
+h1, h2 {
+  font-weight: 300;
+  scroll-margin-top: 5rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
 }
 
-h1, h2, h3 {
-  font-weight: 400;
+h2 {
+  padding: $spacing-sm 0;
+  border-bottom: 1px solid $color-text;
+  margin-bottom: $spacing-sm;
 }
 
-header.site-header {
-  padding: 1em;
-  background-color: $color-bg-dark;
+.title-hero {
+  text-transform: none;
+  border: 0;
+  font-size: 1.5em;
+  text-align: center;
+  margin: $spacing-lg 0;
   color: $color-text-light;
-  display: flex;
+}
 
-  a.site-logo-link {
+h3, strong {
+  font-weight: 400;
+  margin-bottom: $spacing-sm;
+}
+
+header {
+  &.site-header {
+    background-color: $color-bg-dark;
     color: $color-text-light;
-    text-decoration: none;
-  }
-
-  .site-logo {
     display: flex;
-    margin-right: $padding-sm;
-    text-transform: uppercase;
-    font-size: 1.3em;
-    letter-spacing: .1em;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
 
-    img {
-      margin-right: $padding-sm;
+    section {
+      padding: $spacing-lg;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    a.site-logo-link {
+      color: $color-text-light;
+      text-decoration: none;
+
+      &::after {
+        border: 0;
+      }
+    }
+
+    h1.site-logo {
+      display: flex;
+      margin-right: $spacing-lg;
+      text-transform: uppercase;
+      font-size: $spacing-lg;
+
+      img {
+        margin-right: $spacing-md;
+      }
     }
   }
 }
 
-// nav.main-nav {
+.content {
+  padding: 0 $spacing-sm;
+  display: flex;
+  justify-content: center;
 
-// }
+  section {
+    margin-bottom: $spacing-md;
+
+    a {
+      color: $color-primary;
+      position: relative;
+      text-decoration: none;
+    
+      &:after {
+        content: '';
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        border-width: 0 0 1px;
+        border-style: solid;
+        border-color: $color-text-light;
+      }
+    }
+  }
+}
+
+.film-list {
+  padding-top: $spacing-sm;
+  display: flex;
+  // justify-content: space-between;
+  flex-wrap: wrap;
+
+  li.film-item {
+    display: inline-block;
+    margin-right: $spacing-sm;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.film {
+  display: inline-block;
+
+  .film-poster {
+    border: 1px solid $color-secondary;
+    border-radius: $border-radius;
+    padding-bottom: -2px;
+  }
+
+  .film-poster img {
+    border-top-right-radius: $border-radius;
+    border-top-left-radius: $border-radius;
+  }
+ 
+  .film-tag-list {
+    margin-top: -4px;
+    display: flex;
+    color: $color-text-light;
+    background-color: $color-secondary;
+    font-size: .7em;
+    padding: $spacing-sm;
+
+    .film-tag-item {
+      margin-right: $spacing-sm;
+      font-weight: 300;
+    }
+  }
+
+  .film-icons {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 $spacing-sm;
+  }
+
+  .rating-date {
+    font-size: .8em;
+    padding: 4px 0;
+    text-transform: uppercase;
+  }
+}
+
+// Larger screen style overrides
+// ================================================
+@media screen and (min-width: 950px) {
+  section {
+    width: 950px;
+  }
+}

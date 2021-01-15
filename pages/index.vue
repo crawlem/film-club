@@ -1,54 +1,46 @@
 <template>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="jumbotron col mb-0">
-        <h2 class="display-4">
-          Welcome to film club
+  <div class="home">
+    <section>
+      <p class="title-hero">
+        Welcome to film club! Here's what we've been watching...
+      </p>
+
+      <h2>Previously at film club</h2>
+      <FilmList :list="history" :show-ratings="true" />
+    </section>
+
+    <section title="Next meeting" class="col-sm">
+      <div class="card nextMeeting h-100">
+        <h2 class="card-header">
+          Next meeting
         </h2>
-        <p class="lead">
-          We review a film together each month.
-        </p>
-      </div>
-
-      <section title="Next meeting" class="col-sm">
-        <div class="card nextMeeting h-100">
-          <h4 class="card-header">
-            Next meeting
-          </h4>
-          <!-- <img /> -->
-          <div class="card-body">
-            <h5 class="card-title">
-              <span>{{ meetingDate }}</span>
-            </h5>
-            <p class="card-text">
-              The film we will review next time is
-              <a v-if="nextMeeting.url" :href="nextMeeting.url" target="_blank">{{ nextMeeting.filmTitle }}</a>
-              <span v-else>{{ nextMeeting.filmTitle }}</span>
-            </p>
-          </div>
+        <!-- <img /> -->
+        <div class="card-body">
+          <h3 class="card-title">
+            <span>{{ meetingDate }}</span>
+          </h3>
+          <p class="card-text">
+            The film we will <strong>review</strong> next time is
+            <a v-if="nextMeeting.url" :href="nextMeeting.url" target="_blank">{{ nextMeeting.filmTitle }}</a>
+            <span v-else>{{ nextMeeting.filmTitle }}</span>
+          </p>
         </div>
-      </section>
-    </div>
-
-    <section title="Recently watched" class="container-fluid mt-4">
-      <h3>Recently watched</h3>
-      <FilmList :list="history" />
+      </div>
     </section>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import Moment from 'moment'
 import FilmList from '~/components/FilmList.vue'
-
 export default {
   components: {
     FilmList
   },
-  async asyncData ({ $config, $airtable }) {
+  async asyncData ({ $config, $airtable, store }) {
     // Retrieve most recently watched films
-    const historyResponse = await $airtable.get('/Films?view=History&maxRecords=3')
-    const history = await historyResponse.json()
+    await store.dispatch('films/loadHistory')
 
     // Retrieve next meeting date/film
     const nextMeetingResponse = await $airtable.get('/Meetings?maxRecords=1&sort[0][field]=Date&sort[0][direction]=desc&filterByFormula={Date} >= TODAY()')
@@ -73,7 +65,6 @@ export default {
     }
 
     return {
-      history: history.records,
       nextMeeting: {
         date: nextMeetingDate,
         filmTitle: nextFilmTitle,
@@ -84,7 +75,15 @@ export default {
   computed: {
     meetingDate () {
       return (Moment(new Date(this.nextMeeting.date)).isValid()) ? Moment(new Date(this.nextMeeting.date)).format('dddd Do MMMM gggg') : this.nextMeeting.date
+    },
+    history () {
+      return this.$store.state.films.history
     }
+  },
+  methods: {
+    ...mapMutations({
+      loadHistory: 'films/loadHistory'
+    })
   }
 }
 </script>

@@ -10,6 +10,6 @@ export default function ({ $http, $config }, inject) {
   // Some debug
   $airtable.onRequest((config) => {
     // eslint-disable-next-line no-console
-    console.log('Making request to ' + config.url)
+    // console.log('Making request to ' + config.url)
   })
 }
