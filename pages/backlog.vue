@@ -23,12 +23,11 @@ export default {
     FilmList
   },
   async asyncData ({ $config, store }) {
-    // Retrieve most recently watched films
-    await store.dispatch('films/loadBacklog')
+    await store.dispatch('films/loadAllData')
   },
   computed: {
     backlog () {
-      return this.$store.state.films.backlog
+      return this.$store.state.films.films.filter(film => film.fields.Status === 'Added')
     }
   }
 }

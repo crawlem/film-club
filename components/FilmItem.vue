@@ -13,8 +13,8 @@
         </li>
       </ul>
     </div>
-    <div v-if="showRating" class="film-icons">
-      <FilmRating :stars="review.fields.Rating" /> <span class="rating-date">Jan 21</span>
+    <div v-if="showRating && film.meeting && film.meeting.fields.Rating" class="film-icons">
+      <FilmRating :stars="Number(film.meeting.fields.Rating)" /> <span class="rating-date">{{ reviewDate }}</span>
     </div>
     <!-- <div class="card-body">
       <h5 class="card-title">
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import Moment from 'moment'
 import FilmTag from '~/components/FilmTag.vue'
 import FilmRating from '~/components/FilmRating.vue'
 export default {
@@ -71,17 +72,6 @@ export default {
         }
       }
     },
-    review: {
-      type: Object,
-      default () {
-        return {
-          fields: {
-            Review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            Rating: 5
-          }
-        }
-      }
-    },
     showReview: {
       type: Boolean,
       default () {
@@ -96,6 +86,10 @@ export default {
   computed: {
     imgSrc () {
       return ('Poster' in this.film.fields) ? this.film.fields.Poster[0].thumbnails.large.url : '/images/blank.png'
+    },
+    reviewDate () {
+      const rawDate = this.film.meeting.fields.Date
+      return (Moment(new Date(rawDate)).isValid()) ? Moment(new Date(rawDate)).format('MMM YY') : rawDate
     }
   }
 }
