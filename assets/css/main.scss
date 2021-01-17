@@ -115,6 +115,7 @@ header {
   justify-content: center;
 
   section {
+    position: relative;
     margin-bottom: $spacing-md;
 
     a {
@@ -131,6 +132,22 @@ header {
         border-width: 0 0 1px;
         border-style: solid;
         border-color: $color-text-light;
+      }
+    }
+
+    .teaser-link {
+      position: absolute;
+      right: 0;
+      top: .5em;
+      font-size: .8em;
+      text-transform: uppercase;
+
+      a {
+        color: $color-text;
+      
+        &:after {
+          border: 0;
+        }
       }
     }
   }

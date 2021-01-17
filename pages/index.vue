@@ -12,7 +12,10 @@
     </section>
 
     <section>
-      <h2>Ideas</h2>
+      <h2>Backlog</h2>
+      <div class="teaser-link">
+        <a href="/backlog">See more</a>
+      </div>
       <FilmList :list="backlog" />
     </section>
 
@@ -48,13 +51,13 @@ export default {
   },
   computed: {
     history () {
-      return this.$store.state.films.films.filter(film => film.fields.Status === 'Watched')
+      return this.$store.state.filmStore.films.filter(film => film.fields.Status === 'Watched')
     },
     backlog () {
-      return this.$store.state.films.films.filter(film => film.fields.Status === 'Added').slice(0, 6)
+      return this.$store.state.filmStore.films.filter(film => film.fields.Status === 'Added').slice(0, 6)
     },
     nextMeeting () {
-      return this.$store.state.films.meetings[0]
+      return this.$store.state.filmStore.meetings[0]
     },
     nextMeetingDate () {
       const rawDate = this.nextMeeting.fields.Date

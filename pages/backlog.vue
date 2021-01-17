@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     backlog () {
-      return this.$store.state.films.films.filter(film => film.fields.Status === 'Added')
+      return this.$store.state.filmStore.films.filter(film => film.fields.Status === 'Added')
     }
   }
 }
