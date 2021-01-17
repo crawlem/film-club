@@ -4,9 +4,16 @@
       <p class="title-hero">
         Welcome to film club! Here's what we've been watching...
       </p>
+    </section>
 
+    <section>
       <h2>Previously at film club</h2>
       <FilmList :list="history" :show-ratings="true" />
+    </section>
+
+    <section>
+      <h2>Ideas</h2>
+      <FilmList :list="backlog" />
     </section>
 
     <section title="Next meeting" class="col-sm">
@@ -42,6 +49,9 @@ export default {
   computed: {
     history () {
       return this.$store.state.films.films.filter(film => film.fields.Status === 'Watched')
+    },
+    backlog () {
+      return this.$store.state.films.films.filter(film => film.fields.Status === 'Added').slice(0, 6)
     },
     nextMeeting () {
       return this.$store.state.films.meetings[0]

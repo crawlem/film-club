@@ -18,6 +18,7 @@ $spacing-lg: 1.4em;
 
 // ----Misc--------
 $border-radius: 5px;
+$border-radius-sm: 3px;
 
 // Mobile-first styles
 // ================================================
@@ -78,6 +79,7 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 99;
 
     section {
       padding: $spacing-lg;
@@ -137,7 +139,6 @@ header {
 .film-list {
   padding-top: $spacing-sm;
   display: flex;
-  // justify-content: space-between;
   flex-wrap: wrap;
 
   li.film-item {
@@ -151,14 +152,34 @@ header {
   display: inline-block;
 
   .film-poster {
-    border: 1px solid $color-secondary;
-    border-radius: $border-radius;
+    display: block;
     padding-bottom: -2px;
-  }
 
-  .film-poster img {
-    border-top-right-radius: $border-radius;
-    border-top-left-radius: $border-radius;
+    a.film-link {
+      display: block;
+      border: 1px solid $color-secondary;
+      border-radius: $border-radius;
+      margin: -1px;
+
+      &:after {
+        border: 0;
+      }
+
+      &:hover {
+        border: 2px solid $color-tertiary;
+        margin: -2px;
+        border-radius: $border-radius;
+
+        .film-tag-list {
+          background-color: $color-tertiary;
+        }
+      }
+    }
+
+    img {
+      border-top-right-radius: $border-radius-sm;
+      border-top-left-radius: $border-radius-sm;
+    }
   }
  
   .film-tag-list {
@@ -168,6 +189,8 @@ header {
     background-color: $color-secondary;
     font-size: .7em;
     padding: $spacing-sm;
+    border-bottom-left-radius: $border-radius-sm;
+    border-bottom-right-radius: $border-radius-sm;
 
     .film-tag-item {
       margin-right: $spacing-sm;
