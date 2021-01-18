@@ -11,6 +11,11 @@ $color-primary: #F26430;
 $color-secondary: #76949F;
 $color-tertiary: #BBBE64;
 
+// ----Fonts--------
+$font-weight-light: 200;
+$font-weight-medium: 300;
+$font-weight-heavy: 400;
+
 // ----Gutters--------
 $spacing-sm: 6px;
 $spacing-md: .8em;
@@ -38,22 +43,9 @@ body {
   background-color: $color-bg;
   color: $color-text;
   font-family: 'Fira Sans', sans-serif;
-  font-weight: 200;
+  font-weight: $font-weight-light;
   // Push content below fixed header
   padding-top: 5rem;
-}
-
-h1, h2 {
-  font-weight: 300;
-  scroll-margin-top: 5rem;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-}
-
-h2 {
-  padding: $spacing-sm 0;
-  border-bottom: 1px solid $color-text;
-  margin-bottom: $spacing-sm;
 }
 
 .title-hero {
@@ -65,13 +57,11 @@ h2 {
   color: $color-text-light;
 }
 
-h3, strong {
-  font-weight: 400;
-  margin-bottom: $spacing-sm;
-}
-
 header {
   &.site-header {
+    padding: $spacing-lg;
+    display: flex;
+    justify-content: space-between;
     background-color: $color-bg-dark;
     color: $color-text-light;
     display: flex;
@@ -82,7 +72,6 @@ header {
     z-index: 99;
 
     section {
-      padding: $spacing-lg;
       display: flex;
       justify-content: space-between;
     }
@@ -99,8 +88,11 @@ header {
     h1.site-logo {
       display: flex;
       margin-right: $spacing-lg;
-      text-transform: uppercase;
       font-size: $spacing-lg;
+      border: 0;
+      font-weight: $font-weight-medium;
+      text-transform: uppercase;
+      letter-spacing: .1em;
 
       img {
         margin-right: $spacing-md;
@@ -114,9 +106,23 @@ header {
   display: flex;
   justify-content: center;
 
+  p {
+    margin-bottom: 1em;
+  }
+
   section {
     position: relative;
     margin-bottom: $spacing-md;
+
+    h1 {
+      font-weight: $font-weight-medium;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      scroll-margin-top: 5rem;
+      padding: $spacing-sm 0;
+      border-bottom: 1px solid $color-text;
+      margin-bottom: $spacing-sm;
+    }
 
     a {
       color: $color-primary;
@@ -150,6 +156,14 @@ header {
         }
       }
     }
+
+    &.review {
+      color: $color-tertiary;
+    
+      h1 {
+        border-bottom: 1px solid $color-tertiary;
+      }
+    }
   }
 }
 
@@ -162,69 +176,78 @@ header {
     display: inline-block;
     margin-right: $spacing-sm;
     margin-bottom: $spacing-md;
+
+    .film {
+      .film-poster {
+        display: block;
+        padding-bottom: -2px;
+        width: 150px;
+    
+        a.film-link {
+          display: block;
+          border: 1px solid $color-secondary;
+          border-radius: $border-radius;
+          margin: -1px;
+    
+          &:after {
+            border: 0;
+          }
+    
+          &:hover {
+            border: 2px solid $color-primary;
+            margin: -2px;
+            border-radius: $border-radius;
+    
+            .film-title {
+              background-color: $color-primary;
+            }
+          }
+        }
+    
+        img {
+          border-top-right-radius: $border-radius-sm;
+          border-top-left-radius: $border-radius-sm;
+        }
+      }
+     
+      .film-title {
+        margin-top: -4px;
+        color: $color-text-light;
+        background-color: $color-secondary;
+        font-size: .7em;
+        font-weight: $font-weight-light;
+        padding: $spacing-sm;
+        border-bottom-left-radius: $border-radius-sm;
+        border-bottom-right-radius: $border-radius-sm;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 150px;
+        box-sizing: border-box;
+      }
+    
+      .film-icons {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 $spacing-sm;
+    
+        .rating {
+          color: $color-tertiary
+        }
+      }
+    
+      .rating-date {
+        font-size: .8em;
+        padding: 4px 0;
+        text-transform: uppercase;
+      }
+    }
   }
 }
 
-.film {
-  display: inline-block;
-
-  .film-poster {
-    display: block;
-    padding-bottom: -2px;
-
-    a.film-link {
-      display: block;
-      border: 1px solid $color-secondary;
-      border-radius: $border-radius;
-      margin: -1px;
-
-      &:after {
-        border: 0;
-      }
-
-      &:hover {
-        border: 2px solid $color-tertiary;
-        margin: -2px;
-        border-radius: $border-radius;
-
-        .film-tag-list {
-          background-color: $color-tertiary;
-        }
-      }
-    }
-
-    img {
-      border-top-right-radius: $border-radius-sm;
-      border-top-left-radius: $border-radius-sm;
-    }
-  }
- 
-  .film-tag-list {
-    margin-top: -4px;
-    display: flex;
-    color: $color-text-light;
-    background-color: $color-secondary;
-    font-size: .7em;
-    padding: $spacing-sm;
-    border-bottom-left-radius: $border-radius-sm;
-    border-bottom-right-radius: $border-radius-sm;
-
-    .film-tag-item {
-      margin-right: $spacing-sm;
-      font-weight: 300;
-    }
-  }
-
-  .film-icons {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 $spacing-sm;
-  }
-
-  .rating-date {
-    font-size: .8em;
-    padding: 4px 0;
-    text-transform: uppercase;
+.page-film {
+  .rating {
+    font-size: 1.5em;
   }
 }
 

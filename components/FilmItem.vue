@@ -1,19 +1,17 @@
 <template>
   <div class="film">
     <div class="film-poster">
-      <a :href="'/film/' + film.id" class="film-link">
+      <NuxtLink :to="'/film/' + film.id" class="film-link">
         <img
           :src="imgSrc"
           width="150"
           height="225"
           :alt="film.fields.Name"
         >
-        <ul class="film-tag-list">
-          <li v-for="tag in film.fields.Genre" :key="tag" class="film-tag-item">
-            <FilmTag :tag="tag" />
-          </li>
-        </ul>
-      </a>
+        <h2 class="film-title">
+          {{ film.fields.Name }}
+        </h2>
+      </NuxtLink>
     </div>
     <div v-if="showRating && film.meeting && film.meeting.fields.Rating" class="film-icons">
       <FilmRating :stars="Number(film.meeting.fields.Rating)" /> <span class="rating-date">{{ reviewDate }}</span>
@@ -23,12 +21,12 @@
 
 <script>
 import Moment from 'moment'
-import FilmTag from '~/components/FilmTag.vue'
+// import FilmTag from '~/components/FilmTag.vue'
 import FilmRating from '~/components/FilmRating.vue'
 export default {
   name: 'FilmItem',
   components: {
-    FilmTag,
+    // FilmTag,
     FilmRating
   },
   props: {

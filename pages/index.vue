@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="page page-home">
     <section>
       <p class="title-hero">
         Welcome to film club! Here's what we've been watching...
@@ -7,30 +7,32 @@
     </section>
 
     <section>
-      <h2>Previously at film club</h2>
+      <h1>Previously at film club</h1>
       <FilmList :list="history" :show-ratings="true" />
     </section>
 
     <section>
-      <h2>Backlog</h2>
+      <h1>Backlog to watch</h1>
       <div class="teaser-link">
-        <a href="/backlog">See more</a>
+        <NuxtLink to="/backlog">
+          See more
+        </NuxtLink>
       </div>
       <FilmList :list="backlog" />
     </section>
 
     <section title="Next meeting" class="col-sm">
       <div class="card nextMeeting h-100">
-        <h2 class="card-header">
+        <h1 class="card-header">
           Next meeting
-        </h2>
+        </h1>
         <div class="card-body">
           <h3 class="card-title">
             <span>{{ nextMeetingDate }}</span>
           </h3>
           <p class="card-text">
             The film we will review next time is
-            <a v-if="nextMeeting.film.fields['ReelGood link']" :href="nextMeeting.film.fields['ReelGood link']" target="_blank">{{ nextMeeting.film.fields.Name }}</a>
+            <a v-if="nextMeeting.film.fields['ReelGood link']" :to="nextMeeting.film.fields['ReelGood link']" target="_blank">{{ nextMeeting.film.fields.Name }}</a>
             <span v-else>{{ nextMeeting.film.fields.Name }}</span>
           </p>
         </div>
@@ -47,7 +49,7 @@ export default {
     FilmList
   },
   async asyncData ({ $config, store }) {
-    await store.dispatch('films/loadAllData')
+    await store.dispatch('filmStore/loadAllData')
   },
   computed: {
     history () {
@@ -60,7 +62,7 @@ export default {
       return this.$store.state.filmStore.meetings[0]
     },
     nextMeetingDate () {
-      const rawDate = this.nextMeeting.fields.Date
+      const rawDate = (this.nextMeeting) ? this.nextMeeting.fields.Date : ''
       return (Moment(new Date(rawDate)).isValid()) ? Moment(new Date(rawDate)).format('dddd Do MMMM gggg') : rawDate
     }
   }

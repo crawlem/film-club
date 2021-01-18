@@ -12,9 +12,8 @@
   },
   "dependencies": {
     "@nuxt/http": "^0.6.2",
-    "@nuxtjs/axios": "^5.12.4",
     "airtable": "^0.10.1",
-    "core-js": "^3.6.5",
+    "core-js": "^3.8.2",
     "moment": "^2.29.1",
     "nuxt": "^2.14.6"
   },
@@ -22,7 +21,7 @@
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.10.0",
+    "eslint": "^7.18.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "sass": "^1.32.4",
     "sass-loader": "^10.1.1"
