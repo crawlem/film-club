@@ -7,6 +7,11 @@
     </section>
 
     <section>
+      <h1>Next meeting: {{ nextMeetingDate }}</h1>
+      <FilmList :list="new Array(nextMeeting.film)" />
+    </section>
+
+    <section>
       <h1>Previously at film club</h1>
       <FilmList :list="history" :show-ratings="true" />
     </section>
@@ -19,24 +24,6 @@
         </NuxtLink>
       </div>
       <FilmList :list="backlog" />
-    </section>
-
-    <section title="Next meeting" class="col-sm">
-      <div class="card nextMeeting h-100">
-        <h1 class="card-header">
-          Next meeting
-        </h1>
-        <div class="card-body">
-          <h3 class="card-title">
-            <span>{{ nextMeetingDate }}</span>
-          </h3>
-          <p class="card-text">
-            The film we will review next time is
-            <a v-if="nextMeeting.film.fields['ReelGood link']" :to="nextMeeting.film.fields['ReelGood link']" target="_blank">{{ nextMeeting.film.fields.Name }}</a>
-            <span v-else>{{ nextMeeting.film.fields.Name }}</span>
-          </p>
-        </div>
-      </div>
     </section>
   </div>
 </template>
@@ -53,7 +40,7 @@ export default {
   },
   computed: {
     history () {
-      return this.$store.state.filmStore.films.filter(film => film.fields.Status === 'Watched')
+      return this.$store.state.filmStore.films.filter(film => film.fields.Status === 'Watched').slice(0, 6)
     },
     backlog () {
       return this.$store.state.filmStore.films.filter(film => film.fields.Status === 'Added').slice(0, 6)
@@ -63,7 +50,7 @@ export default {
     },
     nextMeetingDate () {
       const rawDate = (this.nextMeeting) ? this.nextMeeting.fields.Date : ''
-      return (Moment(new Date(rawDate)).isValid()) ? Moment(new Date(rawDate)).format('dddd Do MMMM gggg') : rawDate
+      return (Moment(new Date(rawDate)).isValid()) ? Moment(new Date(rawDate)).format('Do MMM gggg') : rawDate
     }
   }
 }
