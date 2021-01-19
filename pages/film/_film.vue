@@ -14,7 +14,7 @@
       </div>
     </section>
 
-    <section v-if="film.meeting" class="review">
+    <section v-if="film.meeting && film.meeting.fields.Review" class="review">
       <h1>Review</h1>
       <p>{{ film.meeting.fields.Review }}</p>
       <p>Reviewed: {{ reviewDate }}</p>
