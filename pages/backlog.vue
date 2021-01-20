@@ -1,15 +1,7 @@
 <template>
-  <div>
-    <div class="jumbotron container-fluid">
-      <h2 class="display-4">
-        Backlog
-      </h2>
-      <p class="lead">
-        These films are on our backlog to watch at some point in future.
-      </p>
-    </div>
-
-    <section title="Upcoming films" class="container-fluid">
+  <div class="page page-backlog">
+    <section>
+      <h1>Backlog to watch</h1>
       <FilmList :list="backlog" />
     </section>
   </div>
@@ -22,12 +14,12 @@ export default {
   components: {
     FilmList
   },
-  async asyncData ({ $config, $airtable }) {
-    const backlogResponse = await $airtable.get('/Films?view=Backlog')
-    const backlog = await backlogResponse.json()
-
-    return {
-      backlog: backlog.records
+  async asyncData ({ $config, store }) {
+    await store.dispatch('filmStore/loadAllData')
+  },
+  computed: {
+    backlog () {
+      return this.$store.state.filmStore.films.filter(film => film.fields.Status === 'Added')
     }
   }
 }

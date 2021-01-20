@@ -1,16 +1,17 @@
 export default function ({ $http, $config }, inject) {
   // Setup the HTTP object
-  const $airtable = $http.create({})
-  $airtable.setBaseURL($config.AIRT_BASE_URL + $config.AIRT_API_BASE_ID)
-  $airtable.setToken($config.AIRT_API_KEY, 'Bearer')
+  const $tmdb = $http.create({})
+  $tmdb.setBaseURL($config.TMDB_BASE_URL)
+  // $tmdb.setHeader($config.TMDB_API_KEY, 'Bearer')
+  $tmdb.setHeader('Content-Type', 'application/json;charset=utf-8')
 
   // Some debug
-  $airtable.onRequest((config) => {
+  $tmdb.onRequest((config) => {
     // eslint-disable-next-line no-console
-    console.log('AIRTABLE: ' + config.url)
+    console.log('TMDB: ' + config.url)
   })
 
-  $airtable.onError((error) => {
+  $tmdb.onError((error) => {
     // if (error.statusCode === 500) {
     //   alert('Request Error!')
     // }
@@ -20,10 +21,10 @@ export default function ({ $http, $config }, inject) {
 
     if (error.response) {
       // eslint-disable-next-line no-console
-      console.log('AIRTABLE ERROR: ' + JSON.stringify(error.response.data))
+      console.error('TMDB ERROR: ' + JSON.stringify(error.response.data))
     }
   })
 
   // Inject to the context
-  inject('airtable', $airtable)
+  inject('tmdb', $tmdb)
 }

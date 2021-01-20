@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <header>
-      <SiteNav />
-    </header>
+  <div class="container">
+    <SiteHeader />
     <div class="content">
       <Nuxt />
     </div>
@@ -10,10 +8,10 @@
 </template>
 
 <script>
-import SiteNav from '~/components/SiteNav.vue'
+import SiteHeader from '~/components/SiteHeader.vue'
 export default {
   components: {
-    SiteNav
+    SiteHeader
   }
 }
 </script>

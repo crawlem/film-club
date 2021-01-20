@@ -1,0 +1,324 @@
+// Variables
+// ================================================
+
+// ----Colours--------
+$color-text: #86BBBD;
+$color-text-light: #E8F1F2;
+$color-bg: #1A2223;
+$color-bg-dark: #12130F;
+$color-fade: #727072;
+$color-primary: #F26430;
+$color-secondary: #76949F;
+$color-tertiary: #BBBE64;
+
+// ----Fonts--------
+$font-weight-light: 200;
+$font-weight-medium: 300;
+$font-weight-heavy: 400;
+
+// ----Gutters--------
+$spacing-sm: 6px;
+$spacing-md: .8em;
+$spacing-lg: 1.4em;
+
+// ----Misc--------
+$border-radius: 5px;
+$border-radius-sm: 3px;
+
+// Mobile-first styles
+// ================================================
+
+// Basic reset
+html, body, div, span, a, h1, h2, h3, h4, h5, h6, p, blockquote, img, 
+ol, ul, li, input, label, select, table, tbody, tfoot, thead, tr, th, 
+td, footer, header, menu, nav, section, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  list-style: none;
+}
+
+body {
+  background-color: $color-bg;
+  color: $color-text;
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: $font-weight-light;
+  // Push content below fixed header
+  padding-top: 5rem;
+}
+
+strong {
+  font-weight: $font-weight-heavy;
+}
+
+.title-hero {
+  text-transform: none;
+  border: 0;
+  font-size: 1.5em;
+  text-align: center;
+  margin: $spacing-lg 0;
+  color: $color-text-light;
+}
+
+header {
+  &.site-header {
+    padding: $spacing-lg;
+    display: flex;
+    justify-content: space-between;
+    background-color: $color-bg-dark;
+    color: $color-text-light;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+
+    section {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    a.site-logo-link {
+      color: $color-text-light;
+      text-decoration: none;
+
+      &::after {
+        border: 0;
+      }
+    }
+
+    h1.site-logo {
+      display: flex;
+      margin-right: $spacing-lg;
+      font-size: $spacing-lg;
+      border: 0;
+      font-weight: $font-weight-medium;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+
+      img {
+        margin-right: $spacing-md;
+      }
+    }
+  }
+}
+
+.content {
+  padding: 0 $spacing-sm;
+  display: flex;
+  justify-content: center;
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  section {
+    position: relative;
+    margin-bottom: $spacing-md;
+
+    h1 {
+      font-size: 1.1em;
+      font-weight: $font-weight-medium;
+      color: $color-text-light;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      scroll-margin-top: 5rem;
+      padding: $spacing-sm 0;
+      border-bottom: 1px solid $color-text-light;
+      margin-bottom: $spacing-sm;
+    }
+
+    a {
+      color: $color-primary;
+      position: relative;
+      text-decoration: none;
+    
+      &:after {
+        content: '';
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        border-width: 0 0 1px;
+        border-style: solid;
+        border-color: $color-text-light;
+      }
+    }
+
+    .teaser-link {
+      position: absolute;
+      right: 0;
+      top: .5em;
+      font-size: .8em;
+      text-transform: uppercase;
+
+      a {
+        color: $color-text;
+      
+        &:after {
+          border: 0;
+        }
+      }
+    }
+
+    &.review {
+      color: $color-tertiary;
+    
+      h1 {
+        color: $color-tertiary;
+        border-bottom: 1px solid $color-tertiary;
+      }
+    }
+  }
+}
+
+.film-list {
+  padding-top: $spacing-sm;
+  display: flex;
+  flex-wrap: wrap;
+
+  li.film-item {
+    display: inline-block;
+    margin-right: $spacing-sm;
+    margin-bottom: $spacing-md;
+
+    .film {
+      .film-poster {
+        display: block;
+        padding-bottom: -2px;
+        width: 150px;
+    
+        a.film-link {
+          display: block;
+          border: 1px solid $color-secondary;
+          border-radius: $border-radius;
+          margin: -1px;
+    
+          &:after {
+            border: 0;
+          }
+    
+          &:hover {
+            border: 2px solid $color-primary;
+            margin: -2px;
+            border-radius: $border-radius;
+    
+            .film-title {
+              background-color: $color-primary;
+            }
+          }
+        }
+    
+        img {
+          border-top-right-radius: $border-radius-sm;
+          border-top-left-radius: $border-radius-sm;
+        }
+      }
+     
+      .film-title {
+        margin-top: -4px;
+        color: $color-text-light;
+        background-color: $color-secondary;
+        font-size: .7em;
+        font-weight: $font-weight-light;
+        padding: $spacing-sm;
+        border-bottom-left-radius: $border-radius-sm;
+        border-bottom-right-radius: $border-radius-sm;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 150px;
+        box-sizing: border-box;
+      }
+    
+      .film-icons {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 $spacing-sm;
+    
+        .rating {
+          color: $color-tertiary
+        }
+      }
+    
+      .rating-date {
+        font-size: .8em;
+        padding: 4px 0;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.page-film {
+  .tagline {
+    font-style: italic;
+  }
+
+  .rating {
+    font-size: 1.5em;
+  }
+
+  .film-poster {
+    img {
+      border: 1px solid $color-secondary;
+      border-radius: $border-radius;
+    }
+  }
+
+  .film-details {
+    margin-top: $spacing-md;
+
+    .genre {
+      border: 1px solid $color-text-light;
+      border-radius: $border-radius;
+      color: $color-text-light;
+      margin-right: $spacing-sm;
+      padding: $spacing-sm;
+      font-size: .8em;
+    }
+  }
+}
+
+.cast-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: $spacing-sm;
+
+  .cast-item {
+    flex: 1;
+    padding: $spacing-sm;
+
+    img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid $color-secondary;
+    }
+
+    .character-name {
+      font-size: .8em;
+    }
+  }
+}
+
+// Larger screen style overrides
+// ================================================
+@media screen and (min-width: 950px) {
+  section {
+    width: 950px;
+  }
+
+  .page-film {
+    .film-content {
+      display: flex;
+    }
+
+    .film-details {
+      margin-left: $spacing-sm
+    }
+  }
+}
