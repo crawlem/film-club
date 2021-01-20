@@ -5,12 +5,20 @@
       <p v-if="tmdb.tagline" class="tagline">
         {{ tmdb.tagline }}
       </p>
-      <p>Directed by <span v-for="director in directors" :key="director.id">{{ director.name }}</span></p>
-      <div class="film-poster">
-        <img :src="imgSrc" :srcset="imgSrcSet" alt="">
-      </div>
-      <div class="synopsis">
-        {{ tmdb.overview }}
+      <div class="film-content">
+        <div class="film-poster">
+          <img :src="imgSrc" :srcset="imgSrcSet" width="300" height="450" alt="">
+        </div>
+        <div class="film-details">
+          <p>
+            <span v-for="genre in tmdb.genres" :key="genre.id" class="genre">{{ genre.name }}</span>
+          </p>
+          <p>Directed by <span v-for="director in directors" :key="director.id">{{ director.name }}</span></p>
+          <div class="synopsis">
+            {{ tmdb.overview }}
+          </div>
+          <FilmCast :cast="filteredCast" />
+        </div>
       </div>
     </section>
 
@@ -74,6 +82,13 @@ export default {
     },
     directors () {
       return this.credits.crew.filter(crew => crew.job === 'Director')
+    },
+    filteredCast () {
+      let castList = []
+      if (this.credits && this.credits.cast) {
+        castList = this.credits.cast.slice(0, 6)
+      }
+      return castList
     }
   }
 }

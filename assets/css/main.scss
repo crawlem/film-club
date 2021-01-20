@@ -48,6 +48,10 @@ body {
   padding-top: 5rem;
 }
 
+strong {
+  font-weight: $font-weight-heavy;
+}
+
 .title-hero {
   text-transform: none;
   border: 0;
@@ -115,12 +119,14 @@ header {
     margin-bottom: $spacing-md;
 
     h1 {
+      font-size: 1.1em;
       font-weight: $font-weight-medium;
+      color: $color-text-light;
       text-transform: uppercase;
       letter-spacing: .1em;
       scroll-margin-top: 5rem;
       padding: $spacing-sm 0;
-      border-bottom: 1px solid $color-text;
+      border-bottom: 1px solid $color-text-light;
       margin-bottom: $spacing-sm;
     }
 
@@ -161,6 +167,7 @@ header {
       color: $color-tertiary;
     
       h1 {
+        color: $color-tertiary;
         border-bottom: 1px solid $color-tertiary;
       }
     }
@@ -246,8 +253,55 @@ header {
 }
 
 .page-film {
+  .tagline {
+    font-style: italic;
+  }
+
   .rating {
     font-size: 1.5em;
+  }
+
+  .film-poster {
+    img {
+      border: 1px solid $color-secondary;
+      border-radius: $border-radius;
+    }
+  }
+
+  .film-details {
+    margin-top: $spacing-md;
+
+    .genre {
+      border: 1px solid $color-text-light;
+      border-radius: $border-radius;
+      color: $color-text-light;
+      margin-right: $spacing-sm;
+      padding: $spacing-sm;
+      font-size: .8em;
+    }
+  }
+}
+
+.cast-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: $spacing-sm;
+
+  .cast-item {
+    flex: 1;
+    padding: $spacing-sm;
+
+    img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid $color-secondary;
+    }
+
+    .character-name {
+      font-size: .8em;
+    }
   }
 }
 
@@ -256,5 +310,15 @@ header {
 @media screen and (min-width: 950px) {
   section {
     width: 950px;
+  }
+
+  .page-film {
+    .film-content {
+      display: flex;
+    }
+
+    .film-details {
+      margin-left: $spacing-sm
+    }
   }
 }

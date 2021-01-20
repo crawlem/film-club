@@ -52,7 +52,9 @@ export default {
     TMDB_BASE_URL: process.env.TMDB_BASE_URL || 'https://api.themoviedb.org/3/',
     TMDB_API_KEY: process.env.TMDB_API_KEY,
     TMDB_IMG_PATH_1X: 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2',
-    TMDB_IMG_PATH_2X: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2'
+    TMDB_IMG_PATH_2X: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2',
+    TMDB_IMG_PATH_1X_FACE: 'https://www.themoviedb.org/t/p/w138_and_h175_face',
+    TMDB_IMG_PATH_2X_FACE: 'https://www.themoviedb.org/t/p/w276_and_h350_face'
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
