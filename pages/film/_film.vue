@@ -14,6 +14,9 @@
             <span v-for="genre in tmdb.genres" :key="genre.id" class="genre">{{ genre.name }}</span>
           </p>
           <p>Directed by <span v-for="director in directors" :key="director.id">{{ director.name }}</span></p>
+          <p v-if="runtime">
+            Runtime: {{ runtime }}
+          </p>
           <div class="synopsis">
             {{ tmdb.overview }}
           </div>
@@ -78,7 +81,7 @@ export default {
     },
     reviewDate () {
       const rawDate = this.film.meeting.fields.Date
-      return (Moment(new Date(rawDate)).isValid()) ? Moment(new Date(rawDate)).format('D MMMM YYYY') : rawDate
+      return (new Date(rawDate) instanceof Date) ? Moment(new Date(rawDate)).format('D MMMM YYYY') : rawDate
     },
     directors () {
       return this.credits.crew.filter(crew => crew.job === 'Director')
@@ -89,6 +92,17 @@ export default {
         castList = this.credits.cast.slice(0, 6)
       }
       return castList
+    },
+    runtime () {
+      let duration = ''
+      if (this.tmdb.runtime) {
+        const hours = Math.floor(this.tmdb.runtime / 60)
+        const hourLabel = (hours === 1) ? 'hour' : 'hours'
+        const minutes = this.tmdb.runtime % 60
+        const minuteLabel = (minutes === 1) ? 'minute' : 'minutes'
+        duration = hours + ' ' + hourLabel + ' ' + minutes + ' ' + minuteLabel
+      }
+      return duration
     }
   }
 }
