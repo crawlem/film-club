@@ -38,7 +38,7 @@ export default {
     },
     anonImgSrc (gender) {
       let src = '/images/anon_'
-      src += (gender === 2) ? '2' : '1'
+      src += (gender === 0) ? '2' : '1'
       return src + '.svg'
     }
   }
