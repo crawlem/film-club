@@ -31,7 +31,7 @@
       <p>Reviewed: {{ reviewDate }}</p>
       <p>
         <FilmRating :stars="Number(film.meeting.fields.Rating)" />
-        ({{ film.meeting.fields.Rating }}/5)
+        ({{ film.meeting.fields.Rating }}/10)
       </p>
     </section>
   </div>
