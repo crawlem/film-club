@@ -235,10 +235,7 @@ header {
         display: flex;
         justify-content: space-between;
         margin: 0 $spacing-sm;
-    
-        .rating {
-          color: $color-tertiary
-        }
+        color: $color-tertiary;
       }
     
       .rating-date {
