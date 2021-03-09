@@ -4,7 +4,7 @@
       <NuxtLink :to="'/film/' + film.id" class="film-link">
         <TMDBPoster :src="film.tmdb.poster_path" :width="150" :height="225" :alt="film.fields.Name" />
         <h2 class="film-title">
-          {{ film.fields.Name }}
+          <FilmTitle :title="film.fields.Name" :release-date="film.tmdb.release_date" />
         </h2>
       </NuxtLink>
     </div>
@@ -16,11 +16,13 @@
 
 <script>
 import Moment from 'moment'
+import FilmTitle from '~/components/FilmTitle.vue'
 import FilmRating from '~/components/FilmRating.vue'
 import TMDBPoster from '~/components/TMDBPoster.vue'
 export default {
   name: 'FilmItem',
   components: {
+    FilmTitle,
     FilmRating,
     TMDBPoster
   },

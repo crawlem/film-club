@@ -1,7 +1,7 @@
 <template>
   <div class="page page-film">
     <section>
-      <h1>{{ film.fields.Name }}</h1>
+      <h1><FilmTitle :title="film.fields.Name" :release-date="film.tmdb.release_date" /></h1>
       <p v-if="film.tmdb.tagline" class="tagline">
         {{ film.tmdb.tagline }}
       </p>
