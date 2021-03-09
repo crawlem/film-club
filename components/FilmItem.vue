@@ -2,12 +2,7 @@
   <div class="film">
     <div class="film-poster">
       <NuxtLink :to="'/film/' + film.id" class="film-link">
-        <img
-          :src="imgSrc"
-          width="150"
-          height="225"
-          :alt="film.fields.Name"
-        >
+        <TMDBPoster :src="film.tmdb.poster_path" :width="150" :height="225" :alt="film.fields.Name" />
         <h2 class="film-title">
           {{ film.fields.Name }}
         </h2>
@@ -21,13 +16,13 @@
 
 <script>
 import Moment from 'moment'
-// import FilmTag from '~/components/FilmTag.vue'
 import FilmRating from '~/components/FilmRating.vue'
+import TMDBPoster from '~/components/TMDBPoster.vue'
 export default {
   name: 'FilmItem',
   components: {
-    // FilmTag,
-    FilmRating
+    FilmRating,
+    TMDBPoster
   },
   props: {
     film: {

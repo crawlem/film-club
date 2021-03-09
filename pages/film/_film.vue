@@ -2,23 +2,23 @@
   <div class="page page-film">
     <section>
       <h1>{{ film.fields.Name }}</h1>
-      <p v-if="tmdb.tagline" class="tagline">
-        {{ tmdb.tagline }}
+      <p v-if="film.tmdb.tagline" class="tagline">
+        {{ film.tmdb.tagline }}
       </p>
       <div class="film-content">
         <div class="film-poster">
-          <img :src="imgSrc" :srcset="imgSrcSet" width="300" height="450" alt="">
+          <TMDBPoster :src="film.tmdb.poster_path" :width="300" :height="450" :alt="film.fields.Name" />
         </div>
         <div class="film-details">
           <p>
-            <span v-for="genre in tmdb.genres" :key="genre.id" class="genre">{{ genre.name }}</span>
+            <span v-for="genre in film.tmdb.genres" :key="genre.id" class="genre">{{ genre.name }}</span>
           </p>
           <p>Directed by <span v-for="director in directors" :key="director.id">{{ director.name }}</span></p>
           <p v-if="runtime">
             Runtime: {{ runtime }}
           </p>
           <div class="synopsis">
-            {{ tmdb.overview }}
+            {{ film.tmdb.overview }}
           </div>
           <FilmCast :cast="filteredCast" />
         </div>
@@ -40,10 +40,12 @@
 <script>
 import Moment from 'moment'
 import FilmRating from '~/components/FilmRating.vue'
+import TMDBPoster from '~/components/TMDBPoster.vue'
 export default {
   name: 'Film',
   components: {
-    FilmRating
+    FilmRating,
+    TMDBPoster
   },
   async asyncData ({ $config, store, route, $tmdb }) {
     // Load all API data
@@ -55,50 +57,33 @@ export default {
     // Find that film in our array
     const film = store.state.filmStore.films.filter(film => film.id === filmId)[0]
 
-    // Load details of the film from TMDB
-    const tmdbId = film.fields['TMDB ID']
-    const tmdbResponse = await $tmdb.get('/movie/' + tmdbId + '?api_key=' + $config.TMDB_API_KEY)
-    const tmdbJson = await tmdbResponse.json()
-
-    // Load details of cast/crew from TMDB
-    const tmdbCreditsResponse = await $tmdb.get('/movie/' + tmdbId + '/credits?api_key=' + $config.TMDB_API_KEY)
-    const tmdbCreditsJson = await tmdbCreditsResponse.json()
-
     // Return data to use in the page
     return {
       filmId,
-      film,
-      tmdb: tmdbJson,
-      credits: tmdbCreditsJson
+      film
     }
   },
   computed: {
-    imgSrc () {
-      return this.$config.TMDB_IMG_PATH_1X + this.tmdb.poster_path
-    },
-    imgSrcSet () {
-      return this.imgSrc + ' 1x, ' + this.$config.TMDB_IMG_PATH_2X + this.tmdb.poster_path + ' 2x'
-    },
     reviewDate () {
       const rawDate = this.film.meeting.fields.Date
       return (new Date(rawDate) instanceof Date) ? Moment(new Date(rawDate)).format('D MMMM YYYY') : rawDate
     },
     directors () {
-      return this.credits.crew.filter(crew => crew.job === 'Director')
+      return this.film.credits.crew.filter(crew => crew.job === 'Director')
     },
     filteredCast () {
       let castList = []
-      if (this.credits && this.credits.cast) {
-        castList = this.credits.cast.slice(0, 6)
+      if (this.film.credits && this.film.credits.cast) {
+        castList = this.film.credits.cast.slice(0, 6)
       }
       return castList
     },
     runtime () {
       let duration = ''
-      if (this.tmdb.runtime) {
-        const hours = Math.floor(this.tmdb.runtime / 60)
+      if (this.film.tmdb.runtime) {
+        const hours = Math.floor(this.film.tmdb.runtime / 60)
         const hourLabel = (hours === 1) ? 'hour' : 'hours'
-        const minutes = this.tmdb.runtime % 60
+        const minutes = this.film.tmdb.runtime % 60
         const minuteLabel = (minutes === 1) ? 'minute' : 'minutes'
         duration = hours + ' ' + hourLabel + ' ' + minutes + ' ' + minuteLabel
       }
