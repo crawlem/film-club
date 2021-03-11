@@ -6,6 +6,9 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
+    htmlAttrs: {
+      lang: 'en'
+    },
     title: 'Osterlies Film Club',
     meta: [
       { charset: 'utf-8' },
