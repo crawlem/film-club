@@ -16,6 +16,3 @@ export default {
   name: 'SiteHeader'
 }
 </script>
-
-<style>
-</style>
