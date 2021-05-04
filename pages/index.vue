@@ -40,7 +40,16 @@ export default {
   },
   computed: {
     history () {
-      return this.$store.state.filmStore.films.filter(film => film.fields.Status === 'Watched').slice(0, 6)
+      // Return the "Watched" films from our list
+      const filmList = this.$store.state.filmStore.films.filter(film => film.fields.Status === 'Watched')
+      // Sort by meeting date descending
+      filmList.sort((a, b) => {
+        const da = new Date(a.meeting.fields.Date)
+        const db = new Date(b.meeting.fields.Date)
+        return db - da
+      })
+      // Return the last 6 films
+      return filmList.slice(0, 6)
     },
     backlog () {
       return this.$store.state.filmStore.films.filter(film => film.fields.Status === 'Added').slice(0, 6)
