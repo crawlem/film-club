@@ -7,7 +7,7 @@ export default function ({ $http, $config }, inject) {
   // Set our auth header on each request (not globally as it interferes with other HTTP plugins)
   $tmdb.onRequest((config) => {
     // eslint-disable-next-line no-console
-    console.log('TMDB: ' + config.url)
+    console.log('TMDB', config.url)
     config.headers.set('Authorization', `Bearer ${$config.TMDB_API_KEY_V4}`)
   })
 
