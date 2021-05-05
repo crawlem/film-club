@@ -49,12 +49,12 @@ export const actions = {
       for (const film of filmsJson.records) {
         // Load details of the film from TMDB
         const tmdbId = film.fields['TMDB ID']
-        const tmdbResponse = await this.$tmdb.get('/movie/' + tmdbId + '?api_key=' + this.$config.TMDB_API_KEY)
+        const tmdbResponse = await this.$tmdb.get('/movie/' + tmdbId)
         const tmdbJson = await tmdbResponse.json()
         film.tmdb = tmdbJson
 
         // Load details of cast/crew from TMDB
-        const tmdbCreditsResponse = await this.$tmdb.get('/movie/' + tmdbId + '/credits?api_key=' + this.$config.TMDB_API_KEY)
+        const tmdbCreditsResponse = await this.$tmdb.get('/movie/' + tmdbId + '/credits')
         const tmdbCreditsJson = await tmdbCreditsResponse.json()
         film.credits = tmdbCreditsJson
       }

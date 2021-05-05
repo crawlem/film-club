@@ -2,12 +2,12 @@ export default function ({ $http, $config }, inject) {
   // Setup the HTTP object
   const $airtable = $http.create({})
   $airtable.setBaseURL($config.AIRT_BASE_URL + $config.AIRT_API_BASE_ID)
-  $airtable.setToken($config.AIRT_API_KEY, 'Bearer')
 
-  // Some debug
+  // Set our auth header on each request (not globally as it interferes with other HTTP plugins)
   $airtable.onRequest((config) => {
     // eslint-disable-next-line no-console
     console.log('AIRTABLE: ' + config.url)
+    config.headers.set('Authorization', `Bearer ${$config.AIRT_API_KEY}`)
   })
 
   $airtable.onError((error) => {
