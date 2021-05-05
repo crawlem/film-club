@@ -14,12 +14,9 @@ export default {
   components: {
     FilmList
   },
-  async asyncData ({ $config, store }) {
-    await store.dispatch('filmStore/loadAllData')
-  },
   computed: {
     backlog () {
-      return this.$store.state.filmStore.films.filter(film => film.fields.Status === 'Added')
+      return this.$store.state.films.filter(film => film.fields.Status === 'Added')
     }
   }
 }

@@ -48,14 +48,11 @@ export default {
     TMDBPoster
   },
   async asyncData ({ $config, store, route, $tmdb }) {
-    // Load all API data
-    await store.dispatch('filmStore/loadAllData')
-
     // Parse the film ID from the URL
     const filmId = route.path.substr(route.path.lastIndexOf('/') + 1)
 
     // Find that film in our array
-    const film = store.state.filmStore.films.filter(film => film.id === filmId)[0]
+    const film = await store.state.films.filter(film => film.id === filmId)[0]
 
     // Return data to use in the page
     return {
