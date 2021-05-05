@@ -35,13 +35,10 @@ export default {
   components: {
     FilmList
   },
-  async asyncData ({ $config, store }) {
-    await store.dispatch('filmStore/loadAllData')
-  },
   computed: {
     history () {
       // Return the "Watched" films from our list
-      const filmList = this.$store.state.filmStore.films.filter(film => film.fields.Status === 'Watched')
+      const filmList = this.$store.state.films.filter(film => film.fields.Status === 'Watched')
       // Sort by meeting date descending
       filmList.sort((a, b) => {
         const da = new Date(a.meeting.fields.Date)
@@ -52,10 +49,10 @@ export default {
       return filmList.slice(0, 6)
     },
     backlog () {
-      return this.$store.state.filmStore.films.filter(film => film.fields.Status === 'Added').slice(0, 6)
+      return this.$store.state.films.filter(film => film.fields.Status === 'Added').slice(0, 6)
     },
     nextMeeting () {
-      return this.$store.state.filmStore.meetings[0]
+      return this.$store.state.meetings[0]
     },
     nextMeetingDate () {
       const rawDate = (this.nextMeeting) ? this.nextMeeting.fields.Date : ''
