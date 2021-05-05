@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci && AIRT_API_KEY=${{ secrets.AIRT_API_KEY }} AIRT_API_BASE_ID=${{ secrets.AIRT_API_BASE_ID }} TMDB_API_KEY=${{ secrets.TMDB_API_KEY }} npm run generate
+      - run: npm ci && AIRT_API_KEY=${{ secrets.AIRT_API_KEY }} AIRT_API_BASE_ID=${{ secrets.AIRT_API_BASE_ID }} TMDB_API_KEY_V4=${{ secrets.TMDB_API_KEY_V4 }} npm run generate
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
