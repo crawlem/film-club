@@ -13,6 +13,11 @@
 
     <section>
       <h1>Previously at film club</h1>
+      <div class="teaser-link">
+        <NuxtLink to="/history">
+          See more
+        </NuxtLink>
+      </div>
       <FilmList :list="history" :show-ratings="true" />
     </section>
 
