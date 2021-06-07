@@ -28,6 +28,7 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 To update the npm dependencies run the below commands.
 
-``` npm update
+```bash
+npm update
 npm audit fix
 ```
