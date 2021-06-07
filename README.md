@@ -23,3 +23,11 @@ $ firebase deploy
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+## Updates
+
+To update the npm dependencies run the below commands.
+
+``` npm update
+npm audit fix
+```
