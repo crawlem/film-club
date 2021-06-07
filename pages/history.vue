@@ -16,7 +16,14 @@ export default {
   },
   computed: {
     history () {
-      return this.$store.state.films.filter(film => film.fields.Status === 'Watched')
+      const filmList = this.$store.state.films.filter(film => film.fields.Status === 'Watched')
+      // Sort by meeting date descending
+      filmList.sort((a, b) => {
+        const da = new Date(a.meeting.fields.Date)
+        const db = new Date(b.meeting.fields.Date)
+        return db - da
+      })
+      return filmList
     }
   }
 }
