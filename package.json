@@ -12,18 +12,18 @@
   },
   "dependencies": {
     "@nuxt/http": "^0.6.4",
-    "airtable": "^0.11.0",
-    "core-js": "^3.11.0",
+    "airtable": "^0.11.1",
+    "core-js": "^3.14.0",
     "moment": "^2.29.1",
-    "nuxt": "^2.15.4"
+    "nuxt": "^2.15.6"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.24.0",
+    "eslint": "^7.28.0",
     "eslint-plugin-nuxt": "^1.0.0",
-    "sass": "^1.32.12",
-    "sass-loader": "^10.1.1"
+    "sass": "^1.34.1",
+    "sass-loader": "^10.2.0"
   }
 }

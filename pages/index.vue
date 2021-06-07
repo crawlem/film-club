@@ -61,7 +61,7 @@ export default {
     },
     nextMeetingDate () {
       const rawDate = (this.nextMeeting) ? this.nextMeeting.fields.Date : ''
-      return (Moment(new Date(rawDate)).isValid()) ? Moment(new Date(rawDate)).format('Do MMM gggg') : rawDate
+      return (Moment(new Date(rawDate)).isValid()) ? Moment(new Date(rawDate)).format('D MMMM') : rawDate
     }
   }
 }
