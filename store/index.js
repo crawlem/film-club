@@ -111,8 +111,12 @@ function populateMeetingsWithFilmData (meetings, films) {
   // Add film details to meetings
   meetings.forEach(function (meeting) {
     if (meeting.fields.Film && meeting.fields.Film.length > 0) {
-      const film = films.find(film => film.id === meeting.fields.Film[0])
-      meeting.film = film
+      // Allow an array of films per meeting
+      meeting.films = []
+      for (let i = 0; i < meeting.fields.Film.length; i++) {
+        const film = films.find(film => film.id === meeting.fields.Film[i])
+        meeting.films.push(film)
+      }
     }
   })
 }
@@ -120,7 +124,7 @@ function populateMeetingsWithFilmData (meetings, films) {
 function populateFilmsWithMeetingData (films, meetings) {
   // Add meeting details to films
   films.forEach(function (film) {
-    // Meeting info
+    // TODO Support more than 1 film per meeting
     const meeting = meetings.find(meeting => meeting.fields.Film[0] === film.id)
     if (meeting) {
       film.meeting = meeting

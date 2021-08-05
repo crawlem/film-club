@@ -8,7 +8,7 @@
 
     <section>
       <h1>Next meeting: {{ nextMeetingDate }}</h1>
-      <FilmList :list="new Array(nextMeeting.film)" />
+      <FilmList :list="nextMeeting.films" />
     </section>
 
     <section>
