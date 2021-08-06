@@ -46,9 +46,13 @@ export default {
       const filmList = this.$store.state.films.filter(film => film.fields.Status === 'Watched')
       // Sort by meeting date descending
       filmList.sort((a, b) => {
-        const da = new Date(a.meeting.fields.Date)
-        const db = new Date(b.meeting.fields.Date)
-        return db - da
+        if (a.meeting && b.meeting) {
+          const da = new Date(a.meeting.fields.Date)
+          const db = new Date(b.meeting.fields.Date)
+          return db - da
+        } else {
+          return 0
+        }
       })
       // Return the last 6 films
       return filmList.slice(0, 6)
@@ -60,7 +64,7 @@ export default {
       return this.$store.state.meetings[0]
     },
     nextMeetingDate () {
-      const rawDate = (this.nextMeeting) ? this.nextMeeting.fields.Date : ''
+      const rawDate = (this.nextMeeting && this.nextMeeting.fields) ? this.nextMeeting.fields.Date : ''
       return (Moment(new Date(rawDate)).isValid()) ? Moment(new Date(rawDate)).format('D MMMM') : rawDate
     }
   }
